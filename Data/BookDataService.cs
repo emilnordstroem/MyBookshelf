@@ -7,6 +7,11 @@ namespace MyBookshelf.Data
 		private static List<Book> _books = new List<Book>();
 		private static long _nextBookId = 1;
 
+		public static List<Book> GetBooks()
+		{
+			return new List<Book>(_books);
+		}
+
 		public static Book? GetBookById (long id)
 		{
 			return _books.Where(book => book.Id == id).FirstOrDefault();

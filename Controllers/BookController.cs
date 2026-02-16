@@ -10,7 +10,7 @@ namespace MyBookshelf.Controllers
 		[HttpGet("books")]
 		public IActionResult Index()
 		{
-			return 
+			return BookDataService.
 		}
 	}
 }
