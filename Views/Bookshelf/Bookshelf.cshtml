@@ -1,2 +1,43 @@
-﻿
+﻿@using MyBookshelf.Models;
+
 <p>Hello, World!</p>
+@functions{
+	public void RenderBook(Book book)
+	{
+		<div>
+			<div>
+				<h1>
+					@book.Title
+				</h1>
+				@if (book.CreatedBy.Count() > 1)
+				{
+					<h1>
+						Authors: @string.Join(", ", book.CreatedBy)
+					</h1>
+				}
+				else
+				{
+					<h1>
+						Author: @book.CreatedBy.First()
+					</h1>
+				}
+			</div>
+			@if (book.ImageUrl != null)
+			{
+				<div>
+					<img src="@book.ImageUrl" />
+				</div>
+			}
+			<div>
+				
+			</div>
+		</div>
+	}
+}
+
+@{
+	foreach(Book book in ViewBag.books)
+	{
+		RenderBook(book);
+	}
+}
