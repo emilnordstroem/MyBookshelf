@@ -13,8 +13,36 @@ namespace MyBookshelf.Data
 		}
 		public static Book? PostBook(Book book)
 		{
-
+			if (_books.Where(book => book.Id == book.Id).FirstOrDefault() != null)
+			{
+				return null;
+			}
+			book.Id = _nextBookId++;
+			_books.Add(book);
 			return book;
+		}
+		public static Book? PutBook(long id, Book book)
+		{
+			if (book.Id != id)
+			{
+				return null;
+			}
+			Book? prevBook = _books.Where(currentBook => currentBook.Id == book.Id).FirstOrDefault();
+			if (prevBook == null)
+			{
+				return null;
+			}
+			_books.Remove(prevBook);
+			_books.Add(book);
+			return book;
+		}
+		public static Book? DeleteBook(Book book)
+		{
+			if (_books.Remove(book))
+			{
+				return book;
+			}
+			return null;
 		}
 	}
 }
