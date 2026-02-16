@@ -6,33 +6,33 @@ namespace MyBookshelf.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class BookController : ControllerBase
+	public class BooksController : ControllerBase
 	{
-		[HttpGet("books")]
+		[HttpGet]
 		public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
 		{
 			return BookDataService.GetBooks();
 		}
 
-		[HttpGet("books/{id}")]
+		[HttpGet("{id}")]
 		public async Task<ActionResult<Book?>> GetBookById(long id)
 		{
 			return BookDataService.GetBookById(id);
 		}
 
-		[HttpPost("books")]
+		[HttpPost]
 		public async Task<ActionResult<Book?>> PostBook(Book book)
 		{
 			return BookDataService.PostBook(book);
 		}
 
-		[HttpPut("books/{id}")]
+		[HttpPut("{id}")]
 		public async Task<ActionResult<Book?>> PutBook(long id, Book book)
 		{
 			return BookDataService.PutBook(id, book);
 		}
 
-		[HttpDelete("books/{id}")]
+		[HttpDelete("{id}")]
 		public async Task<ActionResult<Book?>> DeleteBook(long id)
 		{
 			return BookDataService.DeleteBook(id);

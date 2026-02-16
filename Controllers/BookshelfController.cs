@@ -4,7 +4,7 @@ namespace MyBookshelf.Controllers
 {
 	public class BookshelfController : Controller
 	{
-		public IActionResult Index()
+		public IActionResult Bookshelf()
 		{
 			return View();
 		}
