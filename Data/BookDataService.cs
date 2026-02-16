@@ -4,7 +4,7 @@ namespace MyBookshelf.Data
 {
 	public class BookDataService
 	{
-		private static IEnumerable<Book> _books = new List<Book>();
+		private static List<Book> _books = new List<Book>();
 		private static long _nextBookId = 1;
 
 		public static List<Book> GetBooks()
@@ -40,10 +40,12 @@ namespace MyBookshelf.Data
 			_books.Add(book);
 			return book;
 		}
-		public static Book? DeleteBook(Book book)
+		public static Book? DeleteBook(long id)
 		{
-			if (_books.Remove(book))
+			Book? book = _books.Where(book => book.Id == id).FirstOrDefault();
+			if (book != null)
 			{
+				_books.Remove(book);
 				return book;
 			}
 			return null;
