@@ -6,6 +6,7 @@ namespace MyBookshelf.Controllers
 {
 	public class BookshelfController : Controller
 	{
+		[HttpGet]
 		public IActionResult Bookshelf()
 		{
 			IEnumerable<Book> books = BookDataService.GetBooks();
