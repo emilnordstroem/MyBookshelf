@@ -104,10 +104,25 @@ namespace MyBookshelf.Controllers
 
 			book.Id = 0; // Force EF Core to treat this as a new entity - otherwise conflict with identify property
 
+			var resolvedAuthors = new List<Author>();
 			foreach (var author in book.Authors)
 			{
-                author.Id = 0;
+				var existingAuthor = await _context.Authors
+					.FirstOrDefaultAsync(a => a.Id == author.Id);
+
+				if (existingAuthor != null)
+				{
+					resolvedAuthors.Add(existingAuthor);
+				}
+				else
+				{
+					author.Id = 0;
+					resolvedAuthors.Add(author); // new author
+				}
 			}
+
+			book.Authors = resolvedAuthors;
+
 			try
 			{
 				_context.Books.Add(book);
