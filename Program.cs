@@ -27,7 +27,7 @@ namespace MyBookshelf
 			app.MapStaticAssets();
 			app.MapControllerRoute(
 				name: "default",
-				pattern: "{controller=Bookshelf}/{action=Bookshelf}")
+				pattern: "{controller=Bookshelf}/{action=Index}")
 				.WithStaticAssets();
 
 			app.Run();

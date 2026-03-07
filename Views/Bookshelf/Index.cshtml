@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MyBookshelf.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Bookshelf</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var book in Model) {
+        <tr>
+            <td>
+                <div>
+                    <img />
+                    <ul>
+                        <li>
+                            <a asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
+                        </li>
+                        <li>
+                            @string.Join(", ", book.Authors)
+                        </li>
+                        <li>
+                            @Html.DisplayNameFor(bookItem => book.Rating): @book.Rating / 5
+                        </li>
+                        <li>
+                            Read in @book.Date.Year
+                        </li>
+                    </ul>
+
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
