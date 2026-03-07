@@ -1,4 +1,4 @@
-using Scalar.AspNetCore;
+using MyBookshelf.DAL;
 
 namespace MyBookshelf
 {
@@ -9,23 +9,20 @@ namespace MyBookshelf
 			var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
-			builder.Services.AddControllersWithViews();
-			builder.Services.AddOpenApi();
+			builder.Services.AddControllersWithViews()
+				.AddJsonOptions(options =>
+					{
+						options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+					}
+				);
+			builder.Services.AddDbContext<BookContext>();
 
 			var app = builder.Build();
-
-			// Configure the HTTP request pipeline.
-			if (!app.Environment.IsDevelopment())
-			{
-				app.MapOpenApi();
-			}
 
 			app.UseHttpsRedirection();
 			app.UseRouting();
 
 			app.UseAuthorization();
-
-			app.MapScalarApiReference();
 
 			app.MapStaticAssets();
 			app.MapControllerRoute(
