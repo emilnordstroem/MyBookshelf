@@ -6,8 +6,7 @@ namespace MyBookshelf.Models
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public int? BookId { get; set; }
-		public Book? Book { get; set; }
+		public List<Book> Books { get; set; } = new();
 
 		public override string ToString()
 		{

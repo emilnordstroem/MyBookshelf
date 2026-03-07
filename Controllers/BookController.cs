@@ -59,10 +59,7 @@ namespace MyBookshelf.Controllers
 			existingBook.Comment = book.Comment;
 			existingBook.Date = book.Date;
 
-			var authorsToRemove = existingBook.Authors
-				.Where(a => !book.Authors.Any(incoming => incoming.Id == a.Id))
-				.ToList();
-			_context.Authors.RemoveRange(authorsToRemove);
+			existingBook.Authors.RemoveAll(a => !book.Authors.Any(incoming => incoming.Id == a.Id));
 
 			var authorsToAdd = book.Authors
 				.Where(incoming => !existingBook.Authors.Any(a => a.Id == incoming.Id))
@@ -133,7 +130,6 @@ namespace MyBookshelf.Controllers
             {
                 return NotFound();
             }
-            _context.Authors.RemoveRange(book.Authors);
 			_context.Books.Remove(book);
             await _context.SaveChangesAsync();
 
