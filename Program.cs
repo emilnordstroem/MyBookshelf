@@ -1,4 +1,3 @@
-using MyBookshelf.Data;
 using Scalar.AspNetCore;
 
 namespace MyBookshelf
@@ -31,7 +30,7 @@ namespace MyBookshelf
 			app.MapStaticAssets();
 			app.MapControllerRoute(
 				name: "default",
-				pattern: "{controller=Bookshelf}/{action=Bookshelf}/{id?}")
+				pattern: "{controller=Bookshelf}/{action=Bookshelf}")
 				.WithStaticAssets();
 
 			app.Run();
