@@ -4,7 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Bookshelf</h1>
+<h1>
+    Bookshelf | <a asp-action="CreateBookRecommendation">Create Recommendation</a>
+</h1>
 
 <table class="table">
     <thead>
@@ -22,9 +24,18 @@
                         <li>
                             <a asp-action="Details" asp-route-id="@book.Id">@book.Title</a>
                         </li>
-                        <li>
-                            @string.Join(", ", book.Authors)
-                        </li>
+                        @if(book.Authors == null) // this is only for testing the system
+                        {
+                            <li>
+                                Authors are not set - only in testing
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                @string.Join(", ", book.Authors)
+                            </li>
+                        }
                         <li>
                             @Html.DisplayNameFor(bookItem => book.Rating): @book.Rating / 5
                         </li>

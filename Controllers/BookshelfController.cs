@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,18 +43,47 @@ namespace MyBookshelf.Controllers
             return View(book);
         }
 
-        public IActionResult Create()
+        public IActionResult CreateBookRecommendation()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(IFormCollection collection)
+        public async Task<IActionResult> CreateBookRecommendation(Book book)
         {
-            throw new NotImplementedException();
-        }
+			if (book == null)
+			{
+				return View("Index");
+			}
 
-        public async Task<IActionResult> Edit(int? id)
+			book.Id = 0; // Force EF Core to treat this as a new entity - otherwise conflict with identify property
+
+			var resolvedAuthors = new List<Author>();
+			foreach (var author in book.Authors)
+			{
+				var existingAuthor = await _context.Authors
+					.FirstOrDefaultAsync(a => a.Id == author.Id);
+
+				if (existingAuthor != null)
+				{
+					resolvedAuthors.Add(existingAuthor);
+				}
+				else
+				{
+					author.Id = 0;
+					resolvedAuthors.Add(author); // new author
+				}
+			}
+
+			book.Authors = resolvedAuthors;
+			
+			_context.Books.Add(book);
+			await _context.SaveChangesAsync();
+			return RedirectToAction("Index");
+		}
+
+
+		public async Task<IActionResult> Edit(int? id)
         {
 			throw new NotImplementedException();
 		}

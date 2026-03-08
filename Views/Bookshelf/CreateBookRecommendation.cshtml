@@ -1,0 +1,11 @@
+﻿@using MyBookshelf.Views.Shared;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Book Recommendation | <a asp-action="Index">Back</a></h1>
+@using (Html.BeginForm())
+{
+    <component type="typeof(BookCreate)" render-mode="ServerPrerendered" />
+}

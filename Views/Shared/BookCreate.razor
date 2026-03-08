@@ -1,0 +1,56 @@
+﻿<div>
+    <div>
+        <label for="Title">
+            Title:
+        </label>
+        <input type="text" name="Title" placeholder="e.g. Deepwork" />
+    </div>
+    <div>
+        <label for="Authors">
+            Authors:
+        </label>
+        @*
+            Authors create/select not yet implemented
+        *@
+    </div>
+    <div>
+        <label for="Publisher">
+            Publisher:
+        </label>
+        <input type="text" name="Publisher" placeholder="e.g. Piatkus" />
+    </div>
+    <div>
+        <label for="Published">
+            Published:
+        </label>
+        <input type="date" name="Published" />
+    </div>
+</div>
+<hr />
+<div>
+    <div>
+        <label for="Rating">
+            Rating:
+        </label>
+        <input type="range" name="Rating" min="1" max="5" />
+    </div>
+    <div>
+        <label for="Comment">
+            Recommendation:
+        </label>
+        <textarea name="Comment" placeholder="e.g. I enjoyed the focus on... but I was sceptical of..."></textarea>
+    </div>
+    <div>
+        <label for="Date">
+            Date:
+        </label>
+        <input type="date" name="Date" />
+    </div>
+</div>
+<p>
+    <input type="submit" value="Create Recommendation">
+</p>
+
+@code {
+    
+}
