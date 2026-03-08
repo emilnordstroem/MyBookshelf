@@ -1,0 +1,53 @@
+﻿@using MyBookshelf.Models
+
+@if (Book != null)
+{
+    <div>
+        <h4>
+            @Book.Title
+        </h4>
+        <hr />
+        <div>
+            <div>
+                @if (Book.Authors.Count() > 1)
+                {
+                    <p>
+                        Authors: @string.Join(", ", Book.Authors)
+                    </p>
+                }
+                else if (Book.Authors.Count() == 1)
+                {
+                    <p>
+                        Authors: @Book.Authors.First()
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        Author: unknown
+                    </p>
+                }
+            </div>
+            <div>
+                Publisher: @Book.Publisher [@Book.Published.Year]
+            </div>
+        </div>
+        <hr />
+        <div>
+            <div>
+                Rating: @Book.Rating / 5
+            </div>
+            <div>
+                Recommendation:
+                <textarea disabled>
+                @Book.Comment
+            </textarea>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Book? Book { get; set; }
+}

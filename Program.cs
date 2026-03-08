@@ -16,12 +16,13 @@ namespace MyBookshelf
 					}
 				);
 			builder.Services.AddDbContext<BookContext>();
+			builder.Services.AddServerSideBlazor();
 
 			var app = builder.Build();
 
 			app.UseHttpsRedirection();
+			app.UseStaticFiles();
 			app.UseRouting();
-
 			app.UseAuthorization();
 
 			app.MapStaticAssets();
@@ -29,6 +30,7 @@ namespace MyBookshelf
 				name: "default",
 				pattern: "{controller=Bookshelf}/{action=Index}")
 				.WithStaticAssets();
+			app.MapBlazorHub();
 
 			app.Run();
 		}

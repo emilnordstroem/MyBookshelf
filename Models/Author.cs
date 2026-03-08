@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace MyBookshelf.Models
 {
@@ -6,6 +7,8 @@ namespace MyBookshelf.Models
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
+
+		[JsonIgnore]
 		public List<Book> Books { get; set; } = new();
 
 		public override string ToString()
